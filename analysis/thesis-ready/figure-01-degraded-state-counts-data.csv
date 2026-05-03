@@ -1,0 +1,7 @@
+scenario,design,mean_stale_count,mean_fail_count
+wifi-loss,design-a,13.0,139.333
+wifi-loss,design-b,182.333,0.0
+slow-backend,design-a,0.0,0.0
+slow-backend,design-b,62.333,3.333
+backend-down,design-a,3.667,14.667
+backend-down,design-b,82.333,0.0

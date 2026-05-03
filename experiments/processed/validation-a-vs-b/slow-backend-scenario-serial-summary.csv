@@ -1,0 +1,7 @@
+run_id,scenario,design,repetition,tick_count,first_tick,last_tick,wifi_up_count,stale_count,fail_count,gateway_stale_count,gateway_live_count,recovered_live_tail
+RUN-20260426-1937-validation-slow-backend-design-a-r1,slow-backend,design-a,1,167,34,200,167,0,0,,,True
+RUN-20260426-1958-validation-slow-backend-design-b-r1,slow-backend,design-b,1,210,21,230,210,82,0,82,128,True
+RUN-20260426-2005-validation-slow-backend-design-a-r2,slow-backend,design-a,2,165,81,245,165,0,0,,,True
+RUN-20260426-2013-validation-slow-backend-design-b-r2,slow-backend,design-b,2,129,92,220,128,24,10,24,95,True
+RUN-20260426-2020-validation-slow-backend-design-a-r3,slow-backend,design-a,3,167,24,190,167,0,0,,,True
+RUN-20260426-2026-validation-slow-backend-design-b-r3,slow-backend,design-b,3,211,27,237,210,81,0,81,130,True

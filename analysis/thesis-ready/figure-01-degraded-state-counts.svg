@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="20" y="32" font-family="Arial" font-size="20" font-weight="bold">Figure 1. Mean STALE and FAIL counts in degraded scenarios</text>
+<text x="20" y="55" font-family="Arial" font-size="12">Source: final KPI aggregation from accepted serial-log validation runs.</text>
+<text x="20" y="98" font-family="Arial" font-size="12">wifi-loss / design-a</text>
+<rect x="190" y="85" width="40.6" height="16" fill="#b0b0b0"/>
+<text x="236.6" y="97" font-family="Arial" font-size="11">STALE 13.0</text>
+<rect x="190" y="104" width="435.6" height="16" fill="#4d4d4d"/>
+<text x="631.6" y="116" font-family="Arial" font-size="11">FAIL 139.3</text>
+<text x="20" y="151" font-family="Arial" font-size="12">wifi-loss / design-b</text>
+<rect x="190" y="138" width="570.0" height="16" fill="#b0b0b0"/>
+<text x="766.0" y="150" font-family="Arial" font-size="11">STALE 182.3</text>
+<rect x="190" y="157" width="0.0" height="16" fill="#4d4d4d"/>
+<text x="196.0" y="169" font-family="Arial" font-size="11">FAIL 0.0</text>
+<text x="20" y="204" font-family="Arial" font-size="12">slow-backend / design-a</text>
+<rect x="190" y="191" width="0.0" height="16" fill="#b0b0b0"/>
+<text x="196.0" y="203" font-family="Arial" font-size="11">STALE 0.0</text>
+<rect x="190" y="210" width="0.0" height="16" fill="#4d4d4d"/>
+<text x="196.0" y="222" font-family="Arial" font-size="11">FAIL 0.0</text>
+<text x="20" y="257" font-family="Arial" font-size="12">slow-backend / design-b</text>
+<rect x="190" y="244" width="194.9" height="16" fill="#b0b0b0"/>
+<text x="390.9" y="256" font-family="Arial" font-size="11">STALE 62.3</text>
+<rect x="190" y="263" width="10.4" height="16" fill="#4d4d4d"/>
+<text x="206.4" y="275" font-family="Arial" font-size="11">FAIL 3.3</text>
+<text x="20" y="310" font-family="Arial" font-size="12">backend-down / design-a</text>
+<rect x="190" y="297" width="11.5" height="16" fill="#b0b0b0"/>
+<text x="207.5" y="309" font-family="Arial" font-size="11">STALE 3.7</text>
+<rect x="190" y="316" width="45.9" height="16" fill="#4d4d4d"/>
+<text x="241.9" y="328" font-family="Arial" font-size="11">FAIL 14.7</text>
+<text x="20" y="363" font-family="Arial" font-size="12">backend-down / design-b</text>
+<rect x="190" y="350" width="257.4" height="16" fill="#b0b0b0"/>
+<text x="453.4" y="362" font-family="Arial" font-size="11">STALE 82.3</text>
+<rect x="190" y="369" width="0.0" height="16" fill="#4d4d4d"/>
+<text x="196.0" y="381" font-family="Arial" font-size="11">FAIL 0.0</text>
+<text x="190" y="490" font-family="Arial" font-size="12">Light bar = STALE, dark bar = FAIL. Values are means across three accepted repetitions.</text>
+</svg>

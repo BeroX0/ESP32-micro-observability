@@ -1,0 +1,7 @@
+run_id,scenario,design,repetition,tick_count,first_tick,last_tick,wifi_down_count,stale_count,fail_count,gateway_stale_count,gateway_live_count,recovered_live_tail
+RUN-20260424-0101-validation-wifi-loss-design-a-r1-fixed-long,wifi-loss,design-a,1,296,457,752,134,20,120,,,True
+RUN-20260424-0110-validation-wifi-loss-design-b-r1-long,wifi-loss,design-b,1,296,24,319,172,176,0,176,120,True
+RUN-20260426-1843-validation-wifi-loss-design-a-r2-long,wifi-loss,design-a,2,296,22,317,164,19,150,,,True
+RUN-20260426-1856-validation-wifi-loss-design-b-r2-long,wifi-loss,design-b,2,296,83,378,175,179,0,179,117,True
+RUN-20260426-1911-validation-wifi-loss-design-a-r3-redo-long,wifi-loss,design-a,3,296,403,698,164,0,148,,,True
+RUN-20260426-1919-validation-wifi-loss-design-b-r3-long,wifi-loss,design-b,3,297,35,331,187,192,0,192,105,True

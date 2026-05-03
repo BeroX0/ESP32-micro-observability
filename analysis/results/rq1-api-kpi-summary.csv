@@ -1,0 +1,10 @@
+design,measurement,request_count_per_sample,samples,mean_response_size_bytes,stdev_response_size_bytes,mean_elapsed_ms,stdev_elapsed_ms
+design-a,cpu,1,20,153.0,0.0,2.451,6.151
+design-a,memory,1,20,174.0,0.0,0.913,0.073
+design-a,disk,1,20,63.0,0.0,0.890,0.053
+design-a,connectivity,1,20,174.0,0.0,0.808,0.056
+design-a,rx,1,20,191.0,0.0,0.830,0.058
+design-a,tx,1,20,191.0,0.0,0.819,0.046
+design-a,six_prometheus_queries_total,6,20,946.0,0.0,6.712,6.244
+design-b,gateway_summary,1,20,338.0,0.0,2.153,3.826
+comparison,design_a_total_vs_design_b_summary,,20,946.0 vs 338.0,,6.712 vs 2.153,

@@ -1,0 +1,34 @@
+# Environment files
+.env
+*.env
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Arduino / embedded build artifacts
+*.bin
+*.elf
+*.map
+*.hex
+*.uf2
+build/
+.cache/
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Temporary/backup files
+*.bak
+*.tmp
+*.old
+
+# Local-only files
+*.local
