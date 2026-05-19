@@ -1,0 +1,9 @@
+scenario,design,live_labels,stale_labels,fail_labels,wifi_up_lines,wifi_down_lines,gw_live_lines,gw_stale_lines,gw_fail_lines
+normal,design-a,3600,0,0,900,0,0,0,0
+normal,design-b,3612,0,0,903,0,903,0,0
+wifi-loss,design-a,2761,556,1467,705,491,0,0,0
+wifi-loss,design-b,2736,2020,16,689,504,684,505,4
+slow-backend,design-a,2972,494,1262,1182,0,0,0,0
+slow-backend,design-b,2992,1720,0,1178,0,748,430,0
+backend-down,design-a,2987,79,282,837,0,0,0,0
+backend-down,design-b,3000,1800,0,1200,0,750,450,0

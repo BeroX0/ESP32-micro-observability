@@ -1,0 +1,9 @@
+scenario,design,run_count,accepted_count,avg_duration_seconds,avg_sample_count,runs_with_live,runs_with_stale,runs_with_fail,runs_with_wifi_down,runs_with_gw_stale,runs_with_reset_markers
+normal,design-a,5,5,180.6,180,5,0,0,0,0,0
+normal,design-b,5,5,180.2,180.6,5,0,0,0,0,0
+wifi-loss,design-a,5,5,240.4,239.2,5,5,5,5,0,0
+wifi-loss,design-b,5,5,240.6,238.6,5,5,4,5,5,0
+slow-backend,design-a,5,5,240.8,236.4,5,5,5,0,0,0
+slow-backend,design-b,5,5,240.4,235.6,5,5,0,0,5,0
+backend-down,design-a,5,5,240.4,167.4,5,5,5,0,0,0
+backend-down,design-b,5,5,240.4,240,5,5,0,0,5,0

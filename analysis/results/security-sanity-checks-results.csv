@@ -1,0 +1,8 @@
+check_id,purpose,evidence,result,notes
+SEC-1,"No obvious secrets in committed/shareable files","grep checks","PASS","No real credential values found; only empty Wi-Fi placeholders and documentation discussion were found"
+SEC-2,"No .env/private config in public repo","find and git ls-files","PASS","No .env or private local config found; docs/security/secrets-policy.md is documentation"
+SEC-3,"Design B firmware uses gateway summary endpoint","firmware/design_b grep","PASS","URL_SUMMARY points to http://192.168.137.1:8080/api/v1/summary"
+SEC-4,"Gateway exposes fixed summary endpoint","route grep and curl","PASS","/api/v1/summary returned JSON with state and metrics"
+SEC-5,"No arbitrary Prometheus query endpoint exposed","route grep and negative curl","PASS","/api/v1/query and /query returned 404; query parameter on summary was ignored"
+SEC-6,"Design A requires direct Prometheus endpoint knowledge","firmware/design_a grep","PASS","Design A contains Prometheus /api/v1/query URLs on port 9090"
+SEC-7,"Design B separates backend access into gateway","firmware and gateway grep","PASS","Firmware uses gateway summary endpoint; gateway contains Prometheus base/query logic"

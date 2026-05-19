@@ -2,155 +2,147 @@
 
 ## Overview
 
-This project is a bachelor thesis proof-of-concept for a small ESP32-based display that shows selected server health metrics. The idea is to give quick local awareness of system status without needing to keep a full monitoring dashboard open all the time.
+This project is a bachelor thesis proof-of-concept for a small ESP32-based display that shows selected server health metrics. The goal is to give quick local awareness of system status without needing to keep a full monitoring dashboard open all the time.
 
-The system uses a local Prometheus-based monitoring setup and an ESP32 touch display. The project compares two different ways of getting monitoring data to the device.
+The system uses a local Prometheus-based monitoring setup and an ESP32 touch display. The project compares two ways of getting monitoring data to the device.
 
-## Architectures
-
-The project compares two designs.
+## Compared designs
 
 ### Design A: Direct Prometheus access
 
 In Design A, the ESP32 queries Prometheus directly. The device sends the needed requests, parses the responses, and shows the selected values on the display.
 
-This design has fewer system components, but it also gives the ESP32 more responsibility. The device must handle more backend communication and parsing itself.
+This design has fewer system components, but it also gives the ESP32 more responsibility. The device must handle more backend communication, parsing, timeouts, and failure handling itself.
 
-### Design B: Gateway-mediated access
+Main firmware path:
 
-In Design B, the ESP32 queries a small gateway endpoint instead of querying Prometheus directly. The gateway queries Prometheus, prepares the needed values, adds freshness and state information, and returns a smaller summary to the ESP32.
+```text
+firmware/design_a/esp32_direct_prometheus/
+Design B: Gateway-mediated access
 
-This design adds one extra component, but it makes the ESP32 side simpler. It also gives a cleaner place to handle caching, stale data, and backend access.
+In Design B, the ESP32 queries a small gateway endpoint instead of querying Prometheus directly. The gateway queries Prometheus, prepares the needed values, adds state and freshness information, and returns a compact summary to the ESP32.
 
-## Metrics
+This design adds one extra component, but it makes the ESP32 side simpler. It also gives a clearer place to handle caching, stale data, and backend access.
+
+Main firmware path:
+
+firmware/design_b/esp32_gateway_summary/
+Metrics shown by the prototype
 
 The prototype focuses on a small set of host health signals:
 
-- CPU usage
-- memory usage
-- disk usage
-- network connectivity
-- RX/TX network rates
-- freshness and state information
+CPU usage
+memory usage
+disk usage
+network connectivity
+RX/TX network rates
+LIVE, STALE, and FAIL display states
 
-The goal is not to replace Grafana or a full monitoring platform. The display only shows a compact set of values that are useful for quick status checking.
+The display is not meant to replace Grafana or a full monitoring platform. It only shows a compact set of values for quick status checking.
 
-## Repository structure
+Repository structure
+backend/                 Prometheus and backend configuration
+gateway/                 FastAPI gateway used by Design B
+firmware/                ESP32 firmware for Design A and Design B
+docs/                    Architecture, setup, security, and experiment documentation
+experiments/processed/   Processed validation and measurement data
+experiments/raw/         Note about raw evidence handling
+analysis/results/        Aggregated result files
+analysis/thesis-ready/   Selected result tables and figures
+tools/                   Analysis and validation support scripts
+Running the backend
 
-- `backend/` - Prometheus and backend configuration
-- `gateway/` - FastAPI gateway used by Design B
-- `firmware/` - ESP32 firmware for Design A and Design B
-- `docs/` - architecture, setup, security, and experiment documentation
-- `experiments/` - raw, processed, and summarized validation evidence
-- `analysis/results/` - aggregated KPI results
-- `analysis/thesis-ready/` - selected result tables and figures used for the thesis
-- `tools/` - scripts for analysis and validation support
+The backend setup is based on Prometheus and Node Exporter. The main backend files are in:
 
-## Running the backend
+backend/
 
-The backend setup is based on Prometheus. The main backend files are in:
-
-- `backend/compose/`
-- `backend/prometheus/`
-
-A typical startup is done from the repository root using the provided `Makefile` or Docker Compose files. The exact command depends on the local environment, but the backend should start Prometheus and the needed exporter configuration.
+A typical startup is done from the repository root using the provided Makefile or Docker Compose files. The exact command can depend on the local environment.
 
 Before running the ESP32 firmware, check that Prometheus is reachable from the same network as the ESP32.
 
-## Running the gateway
+Running the gateway
 
 The gateway code is in:
 
-- `gateway/app/`
-
-Install the Python dependencies:
-
-1. Go to `gateway/app`.
-2. Create and activate a Python virtual environment.
-3. Install the dependencies from `requirements.txt`.
+gateway/app/
 
 Example commands:
 
-- `cd gateway/app`
-- `python -m venv .venv`
-- `source .venv/bin/activate`
-- `pip install -r requirements.txt`
+cd gateway/app
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m uvicorn main:app --host 0.0.0.0 --port 8080
 
-Start the gateway:
+The Design B firmware expects the gateway summary endpoint to be reachable from the local network.
 
-- `python -m uvicorn main:app --host 0.0.0.0 --port 8080`
+Validation evidence
 
-The ESP32 Design B firmware expects the gateway summary endpoint to be reachable from the local network.
+The final validation evidence contains 40 accepted final-v2 runs:
 
-## Firmware
+4 scenarios × 2 designs × 5 repetitions = 40 accepted runs
 
-The firmware is divided into two designs:
+The tested scenarios were:
 
-- `firmware/design_a/`
-- `firmware/design_b/`
+normal operation
+Wi-Fi loss
+slow backend response
+backend down
 
-Design A contains the ESP32 firmware that connects directly to Prometheus.
+Processed final-v2 validation data is available in:
 
-Design B contains the ESP32 firmware that connects to the gateway endpoint.
+experiments/processed/final-v2/
+analysis/results/final-v2-thesis-tables.md
+analysis/thesis-ready/final-v2-result-tables.md
 
-Before flashing the firmware, local Wi-Fi settings and local endpoint addresses must be configured for the test environment. Real Wi-Fi credentials should not be committed to Git.
+The public repository contains processed data and selected result tables. Full raw serial logs and packet captures are kept outside this public repository.
 
-## Validation
+Supplementary RQ1 traffic measurement
 
-The project was validated with four scenarios:
+The project also includes supplementary ESP32-facing traffic measurements for RQ1. These measurements compare the normal-operation communication cost between the ESP32 and the endpoint it contacts.
 
-- normal operation
-- Wi-Fi loss
-- slow backend
-- backend down
+Design A measures ESP32-to-Prometheus traffic. Design B measures ESP32-to-gateway traffic.
 
-The validation campaign contains 24 accepted runs:
+Processed traffic data is available in:
 
-- 4 scenarios
-- 2 designs
-- 3 repetitions per design and scenario
+experiments/processed/rq1-practical-measurements/
+analysis/results/rq1-final-v2-traffic-summary.csv
+analysis/thesis-ready/rq1-practical-measurement-table.md
+RQ3 security sanity checks
 
-The raw accepted serial logs are available in:
+The repository includes practical security sanity checks for the least-privilege comparison. These checks focus on access paths, endpoint exposure, credential placement, and query-control boundaries.
 
-- `experiments/raw/`
+They are not penetration testing, vulnerability scanning, or a full production security audit.
 
-Processed validation summaries are available in:
+The public result files are:
 
-- `experiments/processed/`
-- `experiments/summaries/`
-
-The validation mainly used serial-log output from the ESP32. The logs show Wi-Fi state, metric state, gateway state where relevant, and whether values were live, stale, or failed.
-
-## Results
+analysis/results/security-sanity-checks-results.csv
+analysis/thesis-ready/security-sanity-checks-table.md
+Main result direction
 
 Both designs worked during normal operation.
 
-The main difference was seen during failure scenarios. Design A is simpler because the ESP32 talks directly to Prometheus. However, this also means the ESP32 has more responsibility for backend communication and failure handling.
+Design A kept the system path simpler, but placed more backend-facing responsibility on the ESP32.
 
-Design B adds a gateway, but it made the ESP32 side simpler. It also gave clearer stale-state behaviour during backend problems. In the accepted backend-down runs, Design B mainly showed stale data instead of fail states, while Design A entered fail states during the outage.
+Design B added a gateway, but gave the ESP32 a simpler endpoint interface and clearer degraded-state behavior in the tested fault scenarios. It also gave a cleaner least-privilege boundary because Prometheus-facing access could stay on the gateway side.
 
-The analysis also showed that Design B gives a cleaner least-privilege boundary. The ESP32 only needs access to the gateway summary endpoint, while backend-facing access can stay on the gateway side.
+These results are limited to the tested proof-of-concept setup.
 
-Selected result tables and figures are in:
-
-- `analysis/results/`
-- `analysis/thesis-ready/`
-
-## Limitations
+Limitations
 
 This is a local proof-of-concept, not a production monitoring product.
 
-The validation was done in a controlled test setup. The evidence is mainly based on ESP32 serial logs. The project does not include a full production security audit, long-term field testing, or testing across many different networks and hardware platforms.
+The validation was done in a controlled test setup. The project does not include packet-level production benchmarking, long-term field testing, penetration testing, or a full production security audit.
 
-The results should therefore be understood as evidence for the tested setup, not as a general result for all monitoring systems.
+The results should therefore be understood as practical findings from the tested setup, not as general conclusions for all monitoring systems.
 
-## Security note
+Security note
 
 No real secrets should be stored in this repository.
 
-Use `.env.example` as a template and keep real credentials in local environment files outside Git. Wi-Fi passwords, API keys, tokens, and other private values should never be committed.
+Use .env.example as a template and keep real credentials in local environment files outside Git. Wi-Fi passwords, API keys, tokens, and other private values should never be committed.
 
-## Authors
+Authors
 
-Baraa Abo Shala  
+Baraa Abo Shala
 Ayah N M Salem

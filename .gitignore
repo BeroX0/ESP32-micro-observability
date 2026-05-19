@@ -5,9 +5,15 @@
 
 # Python
 .venv/
+venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Captures and local logs
+*.pcapng
+*.pcap
+*.log
 
 # Arduino / embedded build artifacts
 *.bin
@@ -24,6 +30,7 @@ build/
 *.swp
 *~
 .DS_Store
+Thumbs.db
 
 # Temporary/backup files
 *.bak

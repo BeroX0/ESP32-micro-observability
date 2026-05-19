@@ -1,12 +1,5 @@
-# Raw validation evidence
+# Raw evidence
 
-This folder contains the accepted raw serial-log evidence from the A-vs-B validation campaign.
+The public repository contains processed validation data and thesis-ready result tables.
 
-The validation campaign included four scenarios:
-
-- normal operation
-- Wi-Fi loss
-- slow backend
-- backend down
-
-Each scenario was tested with both Design A and Design B, with three accepted repetitions per design. Each run folder contains the serial log and simple operator notes used during the test.
+The full raw serial logs and packet captures are kept outside this public repository. This keeps the public repository smaller and easier to review, while the processed evidence remains available for inspection.

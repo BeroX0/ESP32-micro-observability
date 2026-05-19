@@ -1,9 +1,0 @@
-scenario,design,runs,mean_tick_count,mean_wifi_up_count,mean_wifi_down_count,mean_full_live_count,mean_stale_count,mean_fail_count,mean_gateway_live_count,mean_gateway_stale_count,mean_live_ratio,mean_wifi_up_ratio,mean_wifi_down_ratio,mean_stale_ratio,mean_fail_ratio,mean_gateway_live_ratio,mean_gateway_stale_ratio,all_recovered_live_tail
-backend-down,design-a,3,151.667,132.333,,,3.667,14.667,,,,0.881,,0.025,0.097,,,True
-backend-down,design-b,3,213,212,,,82.333,0,130.667,82.333,,0.995,,0.387,0.000,0.613,0.387,True
-normal,design-a,3,186,184.667,,184.667,,,,,0.993,0.993,,,,,,
-normal,design-b,3,186.667,186.333,,186.333,,,186.667,,0.998,0.998,,,,1.000,,
-slow-backend,design-a,3,166.333,166.333,,,0,0,,,,1.000,,0.000,0.000,,,True
-slow-backend,design-b,3,183.333,182.667,,,62.333,3.333,117.667,62.333,,0.996,,0.320,0.026,0.654,0.320,True
-wifi-loss,design-a,3,296,,154,,13,139.333,,,,,0.520,0.044,0.471,,,True
-wifi-loss,design-b,3,296.333,,178,,182.333,0,114,182.333,,,0.601,0.615,0.000,0.385,0.615,True

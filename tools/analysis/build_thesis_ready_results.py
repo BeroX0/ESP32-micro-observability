@@ -176,14 +176,14 @@ svg.append('</svg>')
 
 figure_note = """# Figure 1. Degraded-state count comparison
 
-Figure description:
+Suggested caption:
 
 **Figure 1. Mean STALE and FAIL counts across degraded scenarios.** The figure summarizes the accepted serial-log validation runs for Wi-Fi loss, slow backend, and backend down. It shows that Design B mainly represented degraded operation as STALE in Wi-Fi-loss and backend-down scenarios, while Design A showed FAIL periods in those cases. The slow-backend result should be interpreted carefully because Design A used the selected proxy-delay method with an adjusted timeout.
 
-Related result section:
+Suggested placement:
 - Chapter 4.6 Cross-scenario result summary
 
-This figure supports the bounded observation that Design B gave clearer degraded-state semantics in the tested proof-of-concept scenarios.
+Do not use this figure to claim that Design B is universally better. Use it to support the narrower claim that Design B gave clearer degraded-state semantics in the tested proof-of-concept scenarios.
 """
 (OUT / "figure-01-degraded-state-counts.md").write_text(figure_note, encoding="utf-8")
 
